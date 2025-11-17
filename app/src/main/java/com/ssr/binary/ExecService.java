@@ -11,6 +11,7 @@ import android.os.IBinder;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.TimeZone;
 
 public class ExecService extends Service {
 
@@ -90,7 +91,17 @@ public class ExecService extends Service {
 
         execThread = new Thread(() -> {
             try {
-                runningProcess = Runtime.getRuntime().exec(command);
+
+
+                ProcessBuilder processBuilder = new ProcessBuilder();
+
+                processBuilder.command(command.split(" ")); // 将命令及其参数分割成数组
+
+                processBuilder.environment().put("TZ", TimeZone.getDefault().getID()); // 设置环境变量
+
+                runningProcess = processBuilder.start(); // 启动进程
+
+                //runningProcess = Runtime.getRuntime().exec(command);
                 sendLog("开始执行: " + command);
 
                 BufferedReader stdout = new BufferedReader(new InputStreamReader(runningProcess.getInputStream()));
