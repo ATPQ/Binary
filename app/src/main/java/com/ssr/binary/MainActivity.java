@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
     private static final String PREFS_PARAM_LIST_KEY = "param_list";
     private ArrayAdapter<String> paramHistoryAdapter;
     private final List<String> paramHistoryList = new ArrayList<>();
-    private Process runningProcess = null;
+    //private Process runningProcess = null;
     private final List<String> logLines = new ArrayList<>();
     private static final int MAX_LOG_LINES = 100;
 
